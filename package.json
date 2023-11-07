@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    // "test": "jest",
     "start": "cross-env NODE_ENV=development node index.js",
-    "test": "cross-env NODE_ENV=testing jest"
+    "test": "cross-env NODE_ENV=testing jest",
+    "migrate": "knex --knexfile knexfile.js migrate:latest",
+    "rollback": "knex --knexfile knexfile.js migrate:rollback",
+    "seed": "knex --knexfile knexfile.js seed:run"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bloominstituteoftechnology/node-testing2-project.git"
   },
   "dependencies": {
+    "db-migrate": "^0.11.14",
     "express": "^4.18.2",
     "knex": "^0.95.15",
     "sqlite3": "^5.1.6"
