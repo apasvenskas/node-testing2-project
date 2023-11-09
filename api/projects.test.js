@@ -42,7 +42,18 @@ describe("Projects model functions", () => {
     })
     describe("[DELETE] / delete project ", () => {
         it("removes project from the database", async () => {
-           
+           const[project_id] = await db("projects").insert(project1)
+           let project = await db("projects").where({project_id}).first()
+           expect(project).toBeTruthy()
+           await request(server).delete("/projects/" + project_id)
+           project = await db("projects").where({project_id}).first()
+           expect(project).toBeFalsy()
+        })
+        it("respond with the deleted project", async () => {
+            await db("projects").insert(project1)
+            let project = await request(server).delete("/project/1")
+            // expect(project.body).toMatchObject(project1)
+            expect(project.body).toHaveProperty("id", project1.id)
         })
     })
 })

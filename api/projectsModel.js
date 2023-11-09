@@ -5,6 +5,13 @@ async function createProject(project){
     return db("projects").where("project_id", id).first()
 }
 
+async function deleteProject(id) {
+    const project = await db("projects").where("project_id", id).first()
+    await db("projects").where("project_id", id).del()
+    return project
+}
+
 module.exports = {
-    createProject
+    createProject,
+    deleteProject
 }
