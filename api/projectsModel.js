@@ -8,6 +8,9 @@ async function createProject(project){
 async function deleteProject(id) {
     const project = await db("projects").where("project_id", id).first()
     await db("projects").where("project_id", id).del()
+    if (!project){
+        return []
+    }
     return project
 }
 

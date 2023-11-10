@@ -53,7 +53,7 @@ describe("Projects model functions", () => {
             await db("projects").insert(project1)
             let project = await request(server).delete("/project/1")
             // expect(project.body).toMatchObject(project1)
-            expect(project.body).toHaveProperty("id", project1.id)
+            expect(project.body).toHaveProperty("project_id", project1.id)
         })
     })
 })
